@@ -17,10 +17,17 @@ public class Login extends env_target {
         driver.manage().window().maximize();
         // Set Url
         driver.get(baseUrl);
-        Duration duration = Duration.ofSeconds(30);
+        Duration duration = Duration.ofSeconds(20);
         WebDriverWait wait = new WebDriverWait(driver, duration);
         wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"login-button\"]"))
         );
+        driver.findElement(By.name("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");
+        driver.findElement(By.xpath("//*[@id=\"login-button\"]")).click();
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"header_container\"]/div[2]/span"))
+        );
+        Duration duration2 = Duration.ofSeconds(30);
     }
 }
